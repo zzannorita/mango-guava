@@ -38,15 +38,15 @@ function Header() {
           <SearchBox />
           <div className={HeaderStyle.rightBox}>
             <div className={HeaderStyle.box}>
-              <img className={HeaderStyle.imgSize} alt="sell" src={sell} />
+              <img className="commonImgSize" alt="sell" src={sell} />
               <div className={HeaderStyle.overlay}>판매</div>
             </div>
             <div className={HeaderStyle.box}>
-              <img className={HeaderStyle.imgSize} alt="chat" src={chat} />
+              <img className="commonImgSize" alt="chat" src={chat} />
               <div className={HeaderStyle.overlay}>채팅</div>
             </div>
             <div className={HeaderStyle.box}>
-              <img className={HeaderStyle.imgSize} alt="perosn" src={person} />
+              <img className="commonImgSize" alt="perosn" src={person} />
               <div className={HeaderStyle.overlay}>마이</div>
             </div>
           </div>

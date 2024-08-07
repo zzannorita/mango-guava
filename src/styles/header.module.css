@@ -71,11 +71,6 @@
   display: block;
 }
 
-.imgSize {
-  width: 30px;
-  height: 30px;
-}
-
 .overlay {
   position: absolute;
   top: 0;
