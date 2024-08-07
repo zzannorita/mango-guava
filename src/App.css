@@ -41,14 +41,7 @@ body {
   font-family: "Pretendard-Regular";
 }
 
-.separator {
-  border: 0;
-  height: 1px;
-  background-color: #ccc;
-  margin: 0 auto;
-  width: 100%;
-}
-
+/*전체 페이지 적용 css */
 :root {
   --container-width: 90%;
   --container-max-width: 1200px;
@@ -79,4 +72,38 @@ body {
 .commonImgSize {
   width: 30px;
   height: 30px;
+}
+
+/*app.js해당 css */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+}
+
+.mainLayout {
+  position: fixed;
+  top: 150px;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+}
+
+.separator {
+  border: 0;
+  height: 1px;
+  background-color: #ccc;
+  margin: 0 auto;
+  width: 100%;
+  position: fixed;
+  top: 150px;
+  z-index: 2000;
+}
+
+.mainContent {
+  margin-top: 230px;
+  z-index: 500;
+  position: relative;
 }
