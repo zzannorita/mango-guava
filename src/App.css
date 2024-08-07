@@ -36,3 +36,42 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  font-family: "Pretendard-Regular";
+}
+
+.separator {
+  border: 0;
+  height: 1px;
+  background-color: #ccc;
+  margin: 0 auto;
+  width: 100%;
+}
+
+:root {
+  --container-width: 90%;
+  --container-max-width: 1200px;
+  --container-padding: 1rem;
+}
+
+.container {
+  width: var(--container-width);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--container-padding);
+}
+
+.commonStyle {
+  display: flex;
+  align-items: center;
+}
+
+.searchBox {
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  outline: none;
+  flex-grow: 1;
+  display: flex;
+}
