@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
+import Alarm from "./Alarm";
 import HeaderStyle from "../styles/header.module.css";
 import logo from "../image/logo.png";
 import alarmOff from "../image/alarmOff.png";
@@ -9,6 +10,12 @@ import sell from "../image/sell.png";
 import SearchBox from "../components/SearchBox";
 
 function Header() {
+  const [ClickedAlarm, setClickedAlarm] = useState(false);
+
+  const handleClick = () => {
+    setClickedAlarm((alarmClick) => !alarmClick);
+  };
+
   return (
     <header className="container">
       <div className={HeaderStyle.headerBox}>
@@ -24,7 +31,9 @@ function Header() {
                 className={HeaderStyle.alarmImg}
                 alt="alarmOff"
                 src={alarmOff}
+                onClick={handleClick}
               />
+              {ClickedAlarm && <Alarm alarmClick={ClickedAlarm} />}
             </div>
           </div>
         </div>
