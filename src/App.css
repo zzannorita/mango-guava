@@ -79,13 +79,13 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;
-  background-color: white;
+  z-index: 2000;
+  background-color: #f9f9f9;
 }
 
 .mainLayout {
   position: fixed;
-  top: 150px;
+  top: 153px;
   width: 100%;
   z-index: 1000;
   background-color: white;
@@ -98,8 +98,8 @@ body {
   margin: 0 auto;
   width: 100%;
   position: fixed;
-  top: 150px;
-  z-index: 2000;
+  top: 152px;
+  z-index: 1000;
 }
 
 .mainContent {
