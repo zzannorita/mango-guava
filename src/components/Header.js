@@ -10,10 +10,11 @@ import sell from "../image/sell.png";
 import SearchBox from "../components/SearchBox";
 
 function Header() {
-  const [ClickedAlarm, setClickedAlarm] = useState(false);
+  const [clickedAlarm, setClickedAlarm] = useState(false);
 
   const handleClick = () => {
     setClickedAlarm((alarmClick) => !alarmClick);
+    console.log("ClickedAlarm 상태 변경:", clickedAlarm);
   };
 
   return (
@@ -33,7 +34,7 @@ function Header() {
                 src={alarmOff}
                 onClick={handleClick}
               />
-              {ClickedAlarm && <Alarm alarmClick={ClickedAlarm} />}
+              <Alarm alarmClick={clickedAlarm} />
             </div>
           </div>
         </div>
