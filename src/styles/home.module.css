@@ -6,5 +6,12 @@
 .productList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+.userRecommendName {
+  font-weight: bold;
+  /* font-size: 20px; */
+  color: #333;
+  margin-bottom: 10px;
 }

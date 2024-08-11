@@ -22,17 +22,27 @@ export default function Home() {
     <div className="container">
       <div className={HomeStyle.recommendBox}>
         <div className={HomeStyle.userRecommendBox}>
-          <div>사용자 추천 상품</div>
-          <div className="productList">
+          <div className={HomeStyle.userRecommendName}>사용자 추천 상품</div>
+          <div className={HomeStyle.productList}>
             {/* {recommendedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))} */}
             <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
           </div>
-        </div>
-        <div className={HomeStyle.locationRecommendBox}>
-          <div>위치별 추천 상품</div>
-          <div></div>
         </div>
       </div>
     </div>
