@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductsCard";
 import HomeStyle from "../styles/home.module.css";
+import cowBoy from "../image/banner.png";
 export default function Home() {
   // const [recommendedProducts, setRecommendedProducts] = useState([]);
 
@@ -20,6 +21,7 @@ export default function Home() {
 
   return (
     <div className="container">
+      <img src={cowBoy} alt="cowBoy" className={HomeStyle.cowBoy}></img>
       <div className={HomeStyle.recommendBox}>
         <div className={HomeStyle.userRecommendBox}>
           <div className={HomeStyle.userRecommendName}>사용자 추천 상품</div>
