@@ -16,6 +16,13 @@ function Header() {
     setClickedAlarm((alarmClick) => !alarmClick);
     console.log("ClickedAlarm 상태 변경:", clickedAlarm);
   };
+  ////////////////////////로그인/////////////////////////////
+  const REST_API_KEY = "";
+  const REDIRECT_URI = "";
+  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const loginHandler = () => {
+    window.location.href = link;
+  };
 
   return (
     <header className="container">
@@ -23,7 +30,7 @@ function Header() {
         <div className={HeaderStyle.headerTop}>
           <div className={HeaderStyle.headerTopRightBox}>
             <div className={HeaderStyle.loginBox}>
-              <Link className={HeaderStyle.link} to="/login">
+              <Link className={HeaderStyle.link} onClick={loginHandler}>
                 로그인/회원가입
               </Link>
             </div>
@@ -57,7 +64,12 @@ function Header() {
             </div>
             <div className={HeaderStyle.box}>
               <img className="commonImgSize" alt="perosn" src={person} />
-              <div className={HeaderStyle.overlay}>마이</div>
+              <Link
+                to="/myshop"
+                className={`${HeaderStyle.overlay} ${HeaderStyle.link}`}
+              >
+                마이
+              </Link>
             </div>
           </div>
         </div>

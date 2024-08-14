@@ -30,7 +30,7 @@ function App() {
           {/* <Route path="/products?item={search-data}" element={<Search />} /> */}
           <Route path="/chat" element={<Chat />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/myshop" element={<Shop />} />
           <Route path="/detail" element={<Detail />} />
           {/* <Route path="/detail?itemId={productId}" element={<Detail />} /> */}
         </Routes>

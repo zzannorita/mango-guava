@@ -22,14 +22,15 @@ const ProductCard = ({ product }) => {
         alt="productImg"
         className={productStyle.productImage}
       ></img>
-
       <img
         src={clickedHeart ? emptyHeartImg : fillHeartImg}
         alt="emptyHeartImg"
         className={productStyle.emptyHeartImg}
         onClick={handleClick}
       ></img>
-
+      {!clickedHeart && (
+        <div className={productStyle.heartAlarm}>상품을 찜하였습니다.</div>
+      )}
       <div className={productStyle.productTopBox}>
         <div className={productStyle.productName}>컨버스 하이 그린</div>
         <div className={productStyle.productPrice}>50,000원</div>
