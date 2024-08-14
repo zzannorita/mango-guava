@@ -74,6 +74,10 @@ body {
   height: 30px;
 }
 
+.impact {
+  color: #ffc107;
+}
+
 /*app.js해당 css */
 .header {
   position: fixed;
