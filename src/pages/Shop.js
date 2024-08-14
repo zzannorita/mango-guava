@@ -3,6 +3,9 @@ import shopStyle from "../styles/shop.module.css";
 import userImg from "../image/userImg.png";
 import editImg from "../image/edit.png";
 import checkImg from "../image/checkbox.png";
+import SearchBox from "../components/SearchBox";
+import ProductsCard from "../components/ProductsCard";
+
 export default function Shop() {
   /////////////////////소개글 수정//////////////////////
   const [isEditing, setIsEditing] = useState(false);
@@ -24,17 +27,69 @@ export default function Shop() {
     setTempDescription(event.target.value);
   };
 
+  /////////////////필터///////////////////
+  const [selectedFilter, setSelectedFilter] = useState("전체");
+
+  //필터 클릭 핸들러
+  const handleFilterClick = (filter) => {
+    setSelectedFilter(filter);
+  };
+
+  //필터에 따른 컨테이너
+  const renderContainer = () => {
+    switch (selectedFilter) {
+      case "판매중":
+        return (
+          <>
+            <div>판매중인상품</div>
+          </>
+        );
+      case "예약중":
+        return (
+          <>
+            <div>예약중인상품</div>
+          </>
+        );
+      case "판매완료":
+        return (
+          <>
+            <div>판매완료상품</div>
+          </>
+        );
+      case "거래후기":
+        return (
+          <>
+            <div>거래후기 콘텐츠</div>
+          </>
+        );
+      default:
+        // 전체 필터에 맞는 상품을 렌더링
+        return (
+          <>
+            <ProductsCard />
+            <ProductsCard />
+            <ProductsCard />
+            {/* 여기에 전체 상품 목록을 추가 */}
+          </>
+        );
+    }
+  };
   return (
     <div className="container">
-      <div className="commonStyle">
+      <div className={shopStyle.container}>
         <div className={shopStyle.leftBox}>
           <div className={shopStyle.myProductsListBox}>
             <div className={shopStyle.myProductsTitle}>내 상품</div>
             <div className={shopStyle.myProductsList}>
-              <div>판매중</div>
-              <div>예약중</div>
-              <div>판매 내역</div>
-              <div>거래 내역</div>
+              {["판매중", "예약중", "판매완료", "거래후기"].map((filter) => (
+                <div
+                  key={filter}
+                  className={shopStyle.myProductsListTitle}
+                  onClick={() => handleFilterClick(filter)}
+                >
+                  {filter}
+                </div>
+              ))}
             </div>
           </div>
           <div className={shopStyle.myInfoListBox}>
@@ -107,7 +162,41 @@ export default function Shop() {
               )}
             </div>
           </div>
-          <div className={shopStyle.myProductsBox}></div>
+          <div className={shopStyle.myProductsBox}>
+            <div className={shopStyle.myProductsText}>내 상품</div>
+            <div className={shopStyle.productListBox}>
+              {["전체", "판매중", "예약중", "판매완료", "거래후기"].map(
+                (filter) => (
+                  <div
+                    key={filter}
+                    className={shopStyle.productsListTitle}
+                    onClick={() => handleFilterClick(filter)}
+                  >
+                    {filter}
+                  </div>
+                )
+              )}
+            </div>
+            <div className={shopStyle.myProductsMainBox}>
+              <div className={shopStyle.mainTopBox}>
+                <div className={shopStyle.mainTopLeftBox}>
+                  <div>
+                    상품 <span className="impact">15</span>
+                  </div>
+                </div>
+                <div className={shopStyle.mainTopRightBox}>
+                  <div className={shopStyle.filterTextBox}>최신</div>
+                  <span>|</span>
+                  <div className={shopStyle.filterTextBox}>저가</div>
+                  <span>|</span>
+                  <div className={shopStyle.filterTextBox}>고가</div>
+                </div>
+              </div>
+              <div className={shopStyle.mainProductsBox}>
+                {renderContainer()}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
