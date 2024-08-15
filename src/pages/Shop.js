@@ -3,8 +3,11 @@ import shopStyle from "../styles/shop.module.css";
 import userImg from "../image/userImg.png";
 import editImg from "../image/edit.png";
 import checkImg from "../image/checkbox.png";
-import SearchBox from "../components/SearchBox";
 import ProductsCard from "../components/ProductsCard";
+import Review from "./Review";
+import Settings from "./Settings";
+import Favorites from "./Favorites";
+import RatingStars from "../components/RatingStars";
 
 export default function Shop() {
   /////////////////////소개글 수정//////////////////////
@@ -29,50 +32,56 @@ export default function Shop() {
 
   /////////////////필터///////////////////
   const [selectedFilter, setSelectedFilter] = useState("전체");
+  const [selectedInfo, setSelectedInfo] = useState(null);
 
   //필터 클릭 핸들러
   const handleFilterClick = (filter) => {
     setSelectedFilter(filter);
+    setSelectedInfo(null);
+  };
+
+  const handleInfoClick = (info) => {
+    setSelectedInfo(info);
+    setSelectedFilter(null); // "내 정보"를 선택했을 때는 "내 상품" 필터 초기화
   };
 
   //필터에 따른 컨테이너
   const renderContainer = () => {
-    switch (selectedFilter) {
-      case "판매중":
-        return (
-          <>
-            <div>판매중인상품</div>
-          </>
-        );
-      case "예약중":
-        return (
-          <>
-            <div>예약중인상품</div>
-          </>
-        );
-      case "판매완료":
-        return (
-          <>
-            <div>판매완료상품</div>
-          </>
-        );
-      case "거래후기":
-        return (
-          <>
-            <div>거래후기 콘텐츠</div>
-          </>
-        );
-      default:
-        // 전체 필터에 맞는 상품을 렌더링
-        return (
-          <>
-            <ProductsCard />
-            <ProductsCard />
-            <ProductsCard />
-            {/* 여기에 전체 상품 목록을 추가 */}
-          </>
-        );
+    if (selectedFilter) {
+      switch (selectedFilter) {
+        case "판매중":
+          return <div>판매중인상품</div>;
+        case "예약중":
+          return <div>예약중인상품</div>;
+        case "판매완료":
+          return <div>판매완료상품</div>;
+        case "거래후기":
+          return <Review />;
+        default:
+          return (
+            <>
+              <ProductsCard />
+              <ProductsCard />
+              <ProductsCard />
+              {/* 여기에 전체 상품 목록을 추가 */}
+            </>
+          );
+      }
+    } else if (selectedInfo) {
+      switch (selectedInfo) {
+        case "구매내역":
+          return <div>구매내역 콘텐츠</div>;
+        case "찜한상품":
+          return <div>찜한상품 콘텐츠</div>;
+        case "즐겨찾기":
+          return <Favorites />;
+        case "설정":
+          return <Settings />;
+        default:
+          return null;
+      }
     }
+    return null;
   };
   return (
     <div className="container">
@@ -95,10 +104,15 @@ export default function Shop() {
           <div className={shopStyle.myInfoListBox}>
             <div className={shopStyle.myProductsTitle}>내 정보</div>
             <div className={shopStyle.myProductsList}>
-              <div>구매내역</div>
-              <div>찜한상품</div>
-              <div>즐겨찾기</div>
-              <div>설정</div>
+              {["구매내역", "찜한상품", "즐겨찾기", "설정"].map((info) => (
+                <div
+                  key={info}
+                  className={shopStyle.myProductsListTitle} // 동일한 스타일 적용
+                  onClick={() => handleInfoClick(info)}
+                >
+                  {info}
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -106,27 +120,7 @@ export default function Shop() {
           <div className={shopStyle.myShopBox}>
             <div className={shopStyle.myShopTitleBox}>
               <div className={shopStyle.myShopTitleText}>000님의 상점</div>
-              <div className={shopStyle.myShopStarBox}>
-                <div className={shopStyle.myShopStars}>
-                  <div className={shopStyle.rating}>
-                    <span className={shopStyle.star} data-value="5">
-                      &#9733;
-                    </span>
-                    <span className={shopStyle.star} data-value="4">
-                      &#9733;
-                    </span>
-                    <span className={shopStyle.star} data-value="3">
-                      &#9733;
-                    </span>
-                    <span className={shopStyle.star} data-value="2">
-                      &#9733;
-                    </span>
-                    <span className={shopStyle.star} data-value="1">
-                      &#9733;
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <RatingStars />
             </div>
             <div className={shopStyle.myShopInfoBox}>
               <img
@@ -163,35 +157,58 @@ export default function Shop() {
             </div>
           </div>
           <div className={shopStyle.myProductsBox}>
-            <div className={shopStyle.myProductsText}>내 상품</div>
+            <div className={shopStyle.myProductsText}>
+              {selectedFilter ? "내 상품" : selectedInfo ? "내 정보" : ""}
+            </div>
             <div className={shopStyle.productListBox}>
-              {["전체", "판매중", "예약중", "판매완료", "거래후기"].map(
-                (filter) => (
+              {selectedFilter &&
+                ["전체", "판매중", "예약중", "판매완료", "거래후기"].map(
+                  (filter) => (
+                    <div
+                      key={filter}
+                      className={`${shopStyle.productsListTitle} ${
+                        selectedFilter === filter ? shopStyle.selected : ""
+                      }`}
+                      onClick={() => handleFilterClick(filter)}
+                    >
+                      {filter}
+                    </div>
+                  )
+                )}
+              {selectedInfo &&
+                ["구매내역", "찜한상품", "즐겨찾기", "설정"].map((info) => (
                   <div
-                    key={filter}
-                    className={shopStyle.productsListTitle}
-                    onClick={() => handleFilterClick(filter)}
+                    key={info}
+                    className={`${shopStyle.productsListTitle} ${
+                      selectedInfo === info ? shopStyle.selected : ""
+                    }`}
+                    onClick={() => handleInfoClick(info)}
                   >
-                    {filter}
+                    {info}
                   </div>
-                )
-              )}
+                ))}
             </div>
             <div className={shopStyle.myProductsMainBox}>
-              <div className={shopStyle.mainTopBox}>
-                <div className={shopStyle.mainTopLeftBox}>
-                  <div>
-                    상품 <span className="impact">15</span>
+              {!(
+                selectedFilter === "거래후기" ||
+                selectedInfo === "즐겨찾기" ||
+                selectedInfo === "설정"
+              ) ? (
+                <div className={shopStyle.mainTopBox}>
+                  <div className={shopStyle.mainTopLeftBox}>
+                    <div>
+                      상품 <span className="impact">15</span>
+                    </div>
+                  </div>
+                  <div className={shopStyle.mainTopRightBox}>
+                    <div className={shopStyle.filterTextBox}>최신</div>
+                    <span>|</span>
+                    <div className={shopStyle.filterTextBox}>저가</div>
+                    <span>|</span>
+                    <div className={shopStyle.filterTextBox}>고가</div>
                   </div>
                 </div>
-                <div className={shopStyle.mainTopRightBox}>
-                  <div className={shopStyle.filterTextBox}>최신</div>
-                  <span>|</span>
-                  <div className={shopStyle.filterTextBox}>저가</div>
-                  <span>|</span>
-                  <div className={shopStyle.filterTextBox}>고가</div>
-                </div>
-              </div>
+              ) : null}
               <div className={shopStyle.mainProductsBox}>
                 {renderContainer()}
               </div>
